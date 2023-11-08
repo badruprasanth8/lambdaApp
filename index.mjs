@@ -1,29 +1,18 @@
+import fs from 'fs';
 
 export const handler = async (event) => {
-  // TODO implement
-  try {
-    const inputArray = event.inputArray; // Pass the array as input using an event
-    
-    if (!Array.isArray(inputArray)) {
-      throw new Error('Input is not an array');
-    }
+  const fileName = 'example.txt';
 
-    // Your array processing code goes here
+  // Attempt to read a file without catching exceptions
+  const fileContent = fs.readFileSync(fileName, 'utf-8');
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'Array processed successfully',
-        result: inputArray,
-      }),
-    };
-  } catch (error) {
-     console.error(error);
-    return {
-      statusCode: 400, // You can choose an appropriate status code
-      body: JSON.stringify({
-        error: error.message,
-      }),
-    };
-  }
+  // Your array processing or other code goes here
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'File read successfully',
+      result: fileContent,
+    }),
+  };
 };
